@@ -24,7 +24,7 @@ const Navbar = () => {
                         hello
                     </NavLink>
                     <NavLink to='/'>
-                        <span className='text-2xl font-bold text-purple-600'>KeyCraft Elit_</span> 
+                        <span className='text-2xl font-bold text-purple-600'>RoomBridge</span> 
                     </NavLink>       
                 </section>
                 
@@ -63,7 +63,7 @@ const Navbar = () => {
                 <section className='w-[260px] flex items-center justify-between'>
                    
                     <NavLink to='/'>
-                        <span className='text-2xl font-bold text-purple-600'>KeyCraft Elit_</span> 
+                        <span className='text-2xl font-bold text-purple-600'>RoomBridge</span> 
                     </NavLink>       
                 </section>
                 

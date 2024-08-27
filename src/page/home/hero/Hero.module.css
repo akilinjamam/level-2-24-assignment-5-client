@@ -1,0 +1,16 @@
+.gradiantText{
+    background: linear-gradient(to right, #b604e2, #22d1f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+@media screen and (max-width: 640px ) {
+    .main{
+        display:flex;
+        flex-wrap: wrap-reverse;
+        height: auto;
+        padding-top: 5px; 
+        padding-bottom: 5px 
+    }
+}
