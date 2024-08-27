@@ -77,7 +77,7 @@ const Featured = () => {
                          productItems?.map((items:TProductItem, index:number) => {
                          return (
                              <div key={index+1}>
-                                 <div  className="w-[350px] xsm:w-full sm:w-full h-[485px] bg-blue-50 p-3 rounded-md">
+                                 <div  className="w-[350px] xsm:w-full sm:w-full h-[450px] bg-blue-50 p-3 rounded-md">
                                  <div className="w-full h-[250px] bg-blue-100 rounded-md mb-3 text-gray-700">
                                         <img className="xsm:w-full sm:w-full lg:w-[400px]" style={{ height:'250px', borderRadius:'10px'}} src={items.img} alt="" />      
                                  </div>
