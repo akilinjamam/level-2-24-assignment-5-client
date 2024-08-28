@@ -7,8 +7,8 @@ import { navManuRoutes } from "../../../nav/navMenuRoute";
 const Footer = () => {
     const date = new Date();
     return (
-        <div className="w-full lg:h-auto bg-gray-200 rounded-lg my-6">
-            <div className={`${footer.main} w-full lg:h-[200px] sm:h-auto xsm:h-auto  bg-gray-200 p-3 flex justify-between items-center my-6 rounded-lg`}>
+        <div className="w-full lg:h-auto bg-purple-200 rounded-lg my-6">
+            <div className={`${footer.main} w-full lg:h-[200px] sm:h-auto xsm:h-auto  bg-purple-100 p-3 flex justify-between items-center my-6 rounded-lg`}>
             <section className="lg:w-[350px]  xsm:w-[50%] sm:w-[50%] lg:h-full xsm:h-auto sm:h-auto">
                 <p className="font-bold text-xl mb-3">All Navigations:</p>
                 {
@@ -47,8 +47,8 @@ const Footer = () => {
             </section>            
             </div>
             <div className="text-center">
-                <p className="text-sm">&copy; All Rights reserved by RoomBridge</p>
-                <p className="pb-3 text-sm">{date.getFullYear()}</p>
+                <p className="text-sm font-semibold">&copy; All Rights reserved by RoomBridge</p>
+                <p className="pb-3 text-sm font-semibold">{date.getFullYear()}</p>
             </div>
         </div>
     );

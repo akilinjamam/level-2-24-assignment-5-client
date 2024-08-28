@@ -1,3 +1,11 @@
+import user1 from '../images/user1.jpg'
+import user2 from '../images/user2.jpg'
+import user3 from '../images/user3.jpg'
+import user4 from '../images/user4.jpg'
+import user5 from '../images/user5.jpg'
+import user6 from '../images/user6.jpg'
+
+
 export const user = 
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -66,6 +74,14 @@ export const clock = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox
 export const room = <i className="uil uil-bed-double text-5xl text-gray-700"></i>
 export const bookingRoom = <i className="uil uil-bookmark text-5xl text-gray-700"></i>
 export const schedule = <i className="uil uil-schedule text-5xl text-gray-700"></i>
+
+
+export const u1 = <img src={user1} alt="" />
+export const u2 = <img src={user2} alt="" />
+export const u3 = <img src={user3} alt="" />
+export const u4 = <img src={user4} alt="" />
+export const u5 = <img src={user5} alt="" />
+export const u6 = <img src={user6} alt="" />
 
 
 
