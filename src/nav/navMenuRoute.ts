@@ -30,4 +30,9 @@ export const navManuRoutes: TNav[] = [
     icon: "",
     link: "/dashboard",
   },
+  {
+    name: "Registration",
+    icon: "",
+    link: "/registration",
+  },
 ];

@@ -12,10 +12,20 @@ const Navbar = () => {
     const [view, setView] = useState(false)
     const [userView, setUserView] = useState(false);
 
+    const handleNavbar = () => {
+        const findNav = navManuRoutes?.some(item => {
+            return item.link === location
+        })
+        if(findNav){
+            return 'block'
+        }else{
+            return 'none'
+        }
+    }
    
 
     return (
-        <div className={`${nav.main} w-[100%] h-12 my-6 rounded-2xl flex items-center`}>
+        <div style={{display: `${handleNavbar()}`}} className={`${nav.main} w-[100%] h-12 my-6 rounded-2xl flex items-center`}>
             <nav className='w-[100%] h-[50%] m-auto flex items-center justify-between xsm:hidden sm:hidden md:hidden lg:flex'>
                
                 <section className='w-[260px] flex items-center justify-between'>
@@ -32,7 +42,7 @@ const Navbar = () => {
                    {
                     navManuRoutes.map((nav:TNav, index:number) => {
                         const active = (value: string) => {
-                            return value === location?.slice(0,10) ? 'text-purple-600' : 'text-gray-700' 
+                            return value === location ? 'text-purple-600' : 'text-gray-700' 
                         }
                         return (
                             <div key={index+1}>
