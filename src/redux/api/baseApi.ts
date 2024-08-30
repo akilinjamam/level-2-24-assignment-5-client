@@ -5,8 +5,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:5000/api",
   credentials: "include",
   prepareHeaders: (headers) => {
-    const token = localStorage.getItem("roomBridgeToken") as string;
-    headers.set("authorization", token);
+    const token = JSON.parse(localStorage.getItem("roomBridgeToken") as string);
+    headers.set("authorization", `Bearer ${token}`);
   },
 });
 

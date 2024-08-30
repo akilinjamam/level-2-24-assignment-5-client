@@ -2,6 +2,7 @@ import Layout from "../layout/Layout";
 import About from "../page/aboutus/About";
 import Contact from "../page/contactus/ContactUs";
 import Error from "../page/error/Error";
+import Room from "../page/room/Room";
 
 export const otherRoutes = [
     {
@@ -11,6 +12,10 @@ export const otherRoutes = [
     {
         path: '/contact',
         element: <Layout><Contact/></Layout>
+    },
+    {
+        path: '/room',
+        element: <Layout><Room/></Layout>
     },
     {
         path: '*',

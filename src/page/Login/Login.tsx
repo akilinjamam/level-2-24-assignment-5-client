@@ -4,6 +4,7 @@ import loginAnim from '../../animation/login.json';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useLoginMutation } from '../../redux/auth/authApi';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
     name: string;
@@ -20,7 +21,7 @@ type Inputs = {
   };
 
 const Login = () => {
-    
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -34,11 +35,23 @@ const Login = () => {
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data)
         try {
+
+            if(!data.email && !data.password){
+                return toast.error('email and password not added')
+            }
+            if(!data.email){
+                return toast.error('email not added')
+            }
+            if(!data.password){
+               return toast.error('password not added')
+            }
+
            const res=  await addLogin(data).unwrap() 
            console.log(res);
            if(res){
              localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
              toast.success(res.message)
+             navigate('/')
              
            } 
         

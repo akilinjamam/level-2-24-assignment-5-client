@@ -3,6 +3,8 @@ import { useLottie } from 'lottie-react';
 import registrationAnim from '../../animation/registration.json';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRegistrationMutation } from '../../redux/auth/authApi';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs = {
     name: string;
@@ -14,6 +16,8 @@ type Inputs = {
 
 
 const Registration = () => {
+
+    const navigate = useNavigate();
 
     const {
         register,
@@ -30,8 +34,13 @@ const Registration = () => {
         try {
            const res =  await addRegistration(data).unwrap();
            console.log(res)
+           if(res){
+               toast.success(res.message)
+               navigate('/login')
+           }
         } catch (error) {
             console.log(error)
+            toast.error( 'something went wrong')
         }
       }
     const options = {

@@ -8,6 +8,8 @@ import { navManuRoutes, TNav } from './navMenuRoute';
 import { barger, user} from '../icons/icons';
 
 const Navbar = () => {
+    const token = localStorage.getItem("roomBridgeToken");
+    console.log(token)
     const location = useLocation().pathname;
     const [view, setView] = useState(false)
     const [userView, setUserView] = useState(false);
@@ -22,16 +24,18 @@ const Navbar = () => {
             return 'none'
         }
     }
-   
+
+    navManuRoutes[5].hide = token ? true : false
+    navManuRoutes[6].hide = token ? false : true
 
     return (
         <div style={{display: `${handleNavbar()}`}} className={`${nav.main} w-[100%] h-12 my-6 rounded-2xl flex items-center`}>
             <nav className='w-[100%] h-[50%] m-auto flex items-center justify-between xsm:hidden sm:hidden md:hidden lg:flex'>
                
-                <section className='w-[260px] flex items-center justify-between'>
+                <section className='w-[260px] flex items-center justify-start'>
                     <NavLink to='/'>
                         {/* <img width={100} src={keyboard} alt="" /> */}
-                        hello
+                        
                     </NavLink>
                     <NavLink to='/'>
                         <span className='text-2xl font-bold text-purple-600'>RoomBridge</span> 
@@ -46,7 +50,11 @@ const Navbar = () => {
                         }
                         return (
                             <div key={index+1}>
-                                <NavLink className={`mx-[20px] font-bold ${active(`${nav.link}`)} hover:text-purple-600 `} to={nav.link}>{nav.name}</NavLink>
+                                {
+                                    !nav.hide
+                                    &&
+                                    <NavLink className={`mx-[20px] font-bold ${active(`${nav.link}`)} hover:text-purple-600 `} to={nav.link}>{nav.name}</NavLink> 
+                                }
                             </div>
                         )
                     } )
