@@ -7,11 +7,36 @@ import Button from "../../components/button/Button";
 import notFound from '../../images/not-found.png';
 import { useState } from "react";
 import { deleted } from "../../icons/icons";
+import Pagination from "../../components/pagination/Pagination";
 const Room = () => {
     const [search, setSearch] = useState('')
     const [capacity, setCapacity] = useState('')
     const [price, setPrice] = useState('')
     const [sort, setSort] = useState('')
+    const [page, setPage] = useState(1)
+    const limit = 10
+
+    
+
+   console.log('capacity:',capacity.length)
+
+    const hidePagination = () => {
+        if(price.length === 0 && capacity.length === 0 && search.length === 0){
+            return 'block'
+        }else if(price.length === 0 && capacity.length !== 0){
+            return 'hidden'
+        }else if(price.length !== 0 && capacity.length === 0){
+            return 'hidden'
+        }else if(price.length !== 0 && capacity.length !== 0){
+            return 'hidden'
+        }else if(search.length == 0){
+            return 'hidden'
+        }else if (search.length !== 0){
+            return 'hidden'
+        }
+        
+    }
+
 
     const allSearchableValue = [
         {
@@ -30,6 +55,14 @@ const Room = () => {
             name: 'sort',
             value: sort
         },
+        {
+            name: 'page',
+            value: page
+        },
+        {
+            name: 'limit',
+            value: limit
+        },
     ]
 
     const {data} = useGetAllRoomsQuery(allSearchableValue)
@@ -44,20 +77,29 @@ const Room = () => {
                 setSort('')
                }} className="mb-3 cursor-pointer xsm:block sm:block lg:hidden md:hidden">{deleted}</p>
             <div className="sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0">
-                <p>Total Products: {data?.data?.length > 0 ? data?.data?.length : 'Loading...'}</p>
+                <p>Total Rooms: {data?.data?.length > 0 ? data?.data?.length : 'Loading...'}</p>
             </div>
             <div className="sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0">
                 <label htmlFor="search">Search:</label>
-                <input value={search} className="ml-2" type="text" onChange={(e) => setSearch(e.target.value)}/>
+                <input value={search} className="ml-2" type="text" onChange={(e) => {
+                    setPage(1)
+                    setSearch(e.target.value)
+                }}/>
             </div>
             <div className={`${room.partOne} flex sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0`}>
                <div className="sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0">
                     <label htmlFor="search">Capacity:</label>
-                    <input value={capacity} className="ml-2" type="number" onChange={(e) => setCapacity(e.target.value )}/>
+                    <input value={capacity} className="ml-2" type="number" onChange={(e) => {
+                        setPage(1)
+                        setCapacity(e.target.value )
+                    }}/>
                </div>
                <div className="lg:ml-2 xsm:ml-0 sm:ml-0 sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0">
                     <label htmlFor="search">Price Per Slot:</label>
-                    <input value={price} className="ml-2" type="number" onChange={(e) => setPrice(e.target.value)}/>
+                    <input value={price} className="ml-2" type="number" onChange={(e) => {
+                        setPage(1)
+                        setPrice(e.target.value)
+                    }}/>
                </div>
             </div>
             <div className={`${room.partOne} flex sm:w-full lg:w-auto xsm:w-full xsm:mb-2 sm:mb-2 lg:mb-0`}>
@@ -134,6 +176,11 @@ const Room = () => {
             </div>
 
         }
+
+        <div className={`w-full h-[50px] bg-purple-50 my-6 rounded-md flex items-center justify-center ${hidePagination()}`}>
+            <Pagination allData={data?.meta} setPage={setPage}/>
+        </div>
+        
     </div>
     );
 };
