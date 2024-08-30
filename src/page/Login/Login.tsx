@@ -33,7 +33,6 @@ const Login = () => {
       
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data)
         try {
 
             if(!data.email && !data.password){
@@ -47,7 +46,6 @@ const Login = () => {
             }
 
            const res=  await addLogin(data).unwrap() 
-           console.log(res);
            if(res){
              localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
              toast.success(res.message)

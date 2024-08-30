@@ -21,8 +21,6 @@ const authApi = baseApi.injectEndpoints({
       },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transformResponse: (response: TResponse<any>) => {
-        console.log("inside redux", response);
-
         return {
           data: response.data,
           meta: response.meta,
