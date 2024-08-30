@@ -9,7 +9,6 @@ import { barger, user} from '../icons/icons';
 
 const Navbar = () => {
     const token = localStorage.getItem("roomBridgeToken");
-    console.log(token)
     const location = useLocation().pathname;
     const [view, setView] = useState(false)
     const [userView, setUserView] = useState(false);
@@ -25,7 +24,7 @@ const Navbar = () => {
         }
     }
 
-    navManuRoutes[5].hide = token ? true : false
+    // navManuRoutes[5].hide = token ? true : false
     navManuRoutes[6].hide = token ? false : true
 
     return (

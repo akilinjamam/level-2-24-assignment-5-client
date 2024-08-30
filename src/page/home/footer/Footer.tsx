@@ -8,11 +8,11 @@ const Footer = () => {
     const date = new Date();
     return (
         <div className="w-full lg:h-auto bg-purple-200 rounded-lg my-6">
-            <div className={`${footer.main} w-full lg:h-[200px] sm:h-auto xsm:h-auto  bg-purple-100 p-3 flex justify-between items-center my-6 rounded-lg`}>
+            <div style={{borderRadius:'10px 10px 0 0'}} className={`${footer.main} w-full lg:h-[200px] sm:h-auto xsm:h-auto  bg-purple-100 p-3 flex justify-between items-center my-6`}>
             <section className="lg:w-[350px]  xsm:w-[50%] sm:w-[50%] lg:h-full xsm:h-auto sm:h-auto">
                 <p className="font-bold text-xl mb-3">All Navigations:</p>
                 {
-                    navManuRoutes.map(nav => {
+                    navManuRoutes?.slice(0,5).map(nav => {
                         return (
                             <NavLink to={nav.link}><p className="leading-7 cursor-pointer">{nav.name}</p></NavLink>
                         )

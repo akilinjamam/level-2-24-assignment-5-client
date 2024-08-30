@@ -1,0 +1,6 @@
+@media screen and ( max-width:640px) {
+    .partOne{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

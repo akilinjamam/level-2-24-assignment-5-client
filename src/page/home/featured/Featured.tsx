@@ -54,7 +54,7 @@ const Featured = () => {
                                 <div className="leading-8 text-gray-700 font-bold">
                                     <p>Name: {items.name}</p>
                                     <p>Capacity: {items.capacity}</p>
-                                    <p>Price Per Slot : {items.price}</p>
+                                    <p>Price Per Slot : {items.pricePerSlot}</p>
                                     
                                     <NavLink to={`/productDetail/${index+1}`}><button className="w-full bg-purple-600 rounded-lg hover:bg-purple-700 text-white my-2">SEE DETAILS</button></NavLink>
                                 </div>
@@ -84,7 +84,7 @@ const Featured = () => {
                                  <div className="leading-8 text-gray-700 font-bold">
                                      <p>Name: {items.name}</p>
                                      <p>Capacity: {items.capacity}</p>
-                                     <p>Price Per Slot : {items.price}</p>
+                                     <p>Price Per Slot : {items.pricePerSlot}</p>
             
                                      <NavLink to={`/productDetail/${index+1}`}><button className="w-full bg-purple-600 rounded-lg hover:bg-purple-700 text-white my-2">SEE DETAILS</button></NavLink>
                                  </div>
