@@ -3,6 +3,7 @@ import About from "../page/aboutus/About";
 import Contact from "../page/contactus/ContactUs";
 import Error from "../page/error/Error";
 import Room from "../page/room/Room";
+import Success from "../page/success/Success";
 
 export const otherRoutes = [
     {
@@ -16,6 +17,10 @@ export const otherRoutes = [
     {
         path: '/room',
         element: <Layout><Room/></Layout>
+    },
+    {
+        path: '/success/:successId',
+        element: <Layout><Success/></Layout>
     },
     {
         path: '*',

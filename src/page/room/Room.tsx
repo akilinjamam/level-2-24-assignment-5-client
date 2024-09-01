@@ -20,24 +20,6 @@ const Room = () => {
 
    console.log('capacity:',capacity.length)
 
-    const hidePagination = () => {
-        if(price.length === 0 && capacity.length === 0 && search.length === 0){
-            return 'block'
-        }else if(price.length === 0 && capacity.length !== 0){
-            return 'hidden'
-        }else if(price.length !== 0 && capacity.length === 0){
-            return 'hidden'
-        }else if(price.length !== 0 && capacity.length !== 0){
-            return 'hidden'
-        }else if(search.length == 0){
-            return 'hidden'
-        }else if (search.length !== 0){
-            return 'hidden'
-        }
-        
-    }
-
-
     const allSearchableValue = [
         {
             name: 'searchTerm',
@@ -66,7 +48,30 @@ const Room = () => {
     ]
 
     const {data} = useGetAllRoomsQuery(allSearchableValue)
-    console.log(data)
+    console.log(data);
+
+    const hidePagination = () => {
+        if(!data?.data){
+            return 'hidden'
+        }
+
+        if(price.length === 0 && capacity.length === 0 && search.length === 0){
+            return 'block'
+        }else if(price.length === 0 && capacity.length !== 0){
+            return 'hidden'
+        }else if(price.length !== 0 && capacity.length === 0){
+            return 'hidden'
+        }else if(price.length !== 0 && capacity.length !== 0){
+            return 'hidden'
+        }else if(search.length == 0){
+            return 'hidden'
+        }else if (search.length !== 0){
+            return 'hidden'
+        }
+        
+    }
+
+
     return (
         <div className={`${room.main}`}>
         <div className={`${room.partOne} lg:w-full xsm:w-full sm:w-full md:full  lg:h-[50px] xsm:h-auto sm:h-auto  bg-purple-50 rounded-lg flex items-center justify-between p-2`}>
@@ -138,7 +143,7 @@ const Room = () => {
                                 <p>Capacity: {item.capacity}</p>
                                 <p>Price Per Slot: {item.pricePerSlot}</p>
                                
-                                <NavLink to={`/productDetail/${index+1}`}><Button>Details</Button></NavLink>
+                                <NavLink to={`/room-detail/${index+1}`}><Button>Details</Button></NavLink>
                                 
                             </section>
                         </div>
@@ -164,7 +169,7 @@ const Room = () => {
                             <p>Capacity: {item.capacity}</p>
                             <p>Price Per Slot: {item.pricePerSlot}</p>
                             
-                            <NavLink to={`/productDetail/${index+1}`}><Button>Details</Button></NavLink>
+                            <NavLink to={`/room-detail/${item._id}`}><Button>Details</Button></NavLink>
                             
                         </section>
                     </div>

@@ -17,6 +17,11 @@ const Navbar = () => {
         const findNav = navManuRoutes?.some(item => {
             return item.link === location
         })
+
+        if(location.slice(0,13) === '/room-detail/') return 'block'
+        if(location.slice(0,9) === '/booking/') return 'block'
+        if(location.slice(0,10) === '/checkout/') return 'block'
+
         if(findNav){
             return 'block'
         }else{
