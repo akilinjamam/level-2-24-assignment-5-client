@@ -24,7 +24,7 @@ const AmarPay = ({ booking, userInfo}: {booking: any, userInfo:any}) => {
             
             store_id: "aamarpaytest",
             tran_id: Math.floor(Math.random()*10000),
-            success_url: "https://level-2-24-assignment-5-client.vercel.app/success",
+            success_url: `https://level-2-24-assignment-5-client.vercel.app/success/${userInfo?._id}`,
             fail_url: "fail/example",
             cancel_url: "cancel/example",
             currency: "BDT",
