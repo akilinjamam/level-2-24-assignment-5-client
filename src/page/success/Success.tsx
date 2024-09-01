@@ -1,9 +1,13 @@
 import { useLottie } from 'lottie-react';
 import successAnim from '../../animation/success.json';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import Button from '../../components/button/Button';
 
 const Success = () => {
+
+    const {successId} = useParams();
+    console.log('userId:', successId)
+
     const options = {
         animationData : successAnim,
         loop:true,

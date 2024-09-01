@@ -19,7 +19,7 @@ export const otherRoutes = [
         element: <Layout><Room/></Layout>
     },
     {
-        path: '/success',
+        path: '/success/:successId',
         element: <Layout><Success/></Layout>
     },
     {
