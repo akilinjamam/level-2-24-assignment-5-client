@@ -37,6 +37,7 @@ const Success = () => {
                   <p>Room Name: {findBooking?.room?.name}</p>
                   <p>Floor No: {findBooking?.room?.floorNo}</p>
                   <p>Room No: {findBooking?.room?.roomNo}</p>
+                  <p>Date: {findBooking?.date}</p>
                   <p>Slot: {findBooking?.slots?.map((item:any) => <span>{item?.startTime}-{parseInt(item?.startTime?.slice(0,2)) + 1 }:00, </span> )}</p>
                   <p>Price: {findBooking?.totalAmount * findBooking?.slots?.length} </p>
                 </div>
