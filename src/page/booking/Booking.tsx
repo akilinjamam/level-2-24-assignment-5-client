@@ -57,7 +57,7 @@ const Bookings = () => {
         formState: { errors },
       } = useForm<Inputs>()
 
-      const {data:allSlots} = useGetAllSlotsQuery(slotQueryObjects)
+      const {data:allSlots, isLoading} = useGetAllSlotsQuery(slotQueryObjects)
       const {data:users} = useGetAllUserQuery('')
       const {data:allRoms} = useGetAllRoomsQuery('')
       console.log(allSlots?.data)
@@ -108,7 +108,7 @@ const Bookings = () => {
             slots: addSlots,
             room: bookingId,
             user: findUser?._id,
-            totalAmount: findRooms?.pricePerSlot,
+            totalAmount: findRooms?.pricePerSlot * addSlots.length,
             isConfirmed:'unconfirmed',
             roomName: findRooms?.name
         }
@@ -154,7 +154,7 @@ const Bookings = () => {
                                         </div>
                                     ))
                                     :
-                                    <p className="ml-2">Slot Not Found in this Date</p>
+                                    <p className="ml-2">{isLoading ? 'loading...' : 'Slot Not Found in this Date'}</p>
                                 }
                             </div>
                             :

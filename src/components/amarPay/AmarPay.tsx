@@ -1,67 +1,52 @@
-import axios from "axios";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useAddBookingMutation } from "../../redux/features/booking.api";
+import { useAddBookingMutation, useAddPaymentMutation } from "../../redux/features/booking.api";
 
+export type IPaymentData = {
+    total_amount: number;
+    CUS_name: string;
+    CUS_email: string;
+    CUS_phone: number;
+    CUS_add1: string;
+    bookingId?: string;
+  };
+  
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const AmarPay = ({ booking, userInfo}: {booking: any, userInfo:any}) => {
     // const navigation = useNavigate();
-    const sandboxUrl = 'https://sandbox.aamarpay.com/index.php';
-
+   
     console.log(userInfo)
     console.log(booking)
 
-    const formData = { cus_name: userInfo?.name, cus_email: userInfo?.email, cus_phone: userInfo?.phone, amount: booking.totalAmount }
+    const userData:IPaymentData = {
+            total_amount: booking?.totalAmount,
+            CUS_name: userInfo?.name,
+            CUS_email: userInfo?.email,
+            CUS_add1: userInfo?.address,
+            CUS_phone: userInfo?.phone
+    }
 
-    const uploadAbleData = new FormData();
     const [addBooking] = useAddBookingMutation()
+    const [addPayment] = useAddPaymentMutation()
 
     const handlePayment = async () => {
-        console.log('hello')
         console.log(booking)
 
         try {
             const res = await addBooking(booking).unwrap();
-            console.log('booking response:', res?.data?.user?._id);
-            const userId = res?.data?._id;
-            if(userId){
-                toast.success('waiting for redirection...')
-                const data = {  
-                    store_id: "aamarpaytest",
-                    tran_id: Math.floor(Math.random()*10000),
-                    success_url: `https://level-2-24-assignment-3.vercel.app/success?bookingId=${userId}`,
-                    fail_url: "fail/example",
-                    cancel_url: "cancel/example",
-                    currency: "BDT",
-                    signature_key: "dbb74894e82415a2f7ff0ec3a97e4183",
-                    desc: "Description",
-                    cus_add1: "Dhaka",
-                    cus_add2: "Dhaka",
-                    cus_city: "Dhaka",
-                    cus_state: "Dhaka",
-                    cus_postcode: "0",
-                    cus_country: "Bangladesh",
-                    type: "json"
+            console.log('booking response:', res);
+            if(res?.statusCode === 200){
+                toast.success('booking successfully done')
+                const paymentInfoData = {
+                    ...userData,
+                    bookingId: res?.data?._id
                 }
 
-                const newData:any = { ...data, ...formData };
-                    for (const x in newData) {
-                        uploadAbleData.append(x, newData[x]);
-                    }
-
-                const response = await axios.post(sandboxUrl, uploadAbleData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-                });
-
-                     const paymentData = await response.data;
-                    console.log('payment response:', paymentData)
-                    if(paymentData.payment_url){
-                        window.location.href = paymentData.payment_url
-                    }
-
+               const paymentResponse = await addPayment(paymentInfoData).unwrap();
+               if(paymentResponse?.statusCode === 200){
+                    window.location.href = paymentResponse?.data;
+               }
+               console.log('payment response :',paymentResponse)
             }
 
         } catch (error) {
