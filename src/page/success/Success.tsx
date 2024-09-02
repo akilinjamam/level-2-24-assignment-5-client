@@ -18,7 +18,7 @@ const Success = () => {
     const {data} = useGetMyBookingQuery('');
    
 
-    const findBooking = data?.data?.find((f:any) => f?._id === '66d58c8e23f28470a27adcf6' );
+    const findBooking = data?.data?.find((f:any) => f?._id === successId );
 
    
 
