@@ -121,11 +121,14 @@ const Bookings = () => {
                 <p  className="text-gray-700 text-3xl font-bold my-6">Booking Form:</p>
             <hr />
             <br />
-            <div className="w-[200%] h-[auto] bg-purple-100 rounded-md p-2">
+            <div className="lg:w-[200%] sm:w-auto  h-[auto] bg-purple-100 rounded-md p-2">
                 <p className="ml-3">Available slots for Dates : </p>
                 <div className="flex items-center">
-                    {
+                    { showUniqueDate?.length > 0
+                        ?
                         showUniqueDate?.map((item:any) => <p onClick={() => setAvailableDate(item)} className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
+                        :
+                        <p>Loading..</p>
                     }
                 </div>
             </div>
