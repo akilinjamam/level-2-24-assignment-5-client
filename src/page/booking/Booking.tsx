@@ -29,7 +29,6 @@ const Bookings = () => {
     const {bookingId} = useParams();
 
     const [dateHolder, setDateHolder] = useState('');
-    const [availableDate, setAvailableDate] = useState('');
   
     const [addSlots, setAddSlots] = useState<TAddSlots[]>([])
     
@@ -126,7 +125,7 @@ const Bookings = () => {
                 <div className="flex items-center">
                     { showUniqueDate?.length > 0
                         ?
-                        showUniqueDate?.map((item:any) => <p onClick={() => setAvailableDate(item)} className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
+                        showUniqueDate?.map((item:any) => <p className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
                         :
                         <p>Loading..</p>
                     }
@@ -134,7 +133,7 @@ const Bookings = () => {
             </div>
             <br />
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input value={availableDate} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="date" {...register("date")}  />
+                    <input  style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="date" {...register("date")}  />
                     {errors.date && <span>This field is required</span>}
                     <br />
                     <div className="flex flex-wrap lg:w-[200%] md:w-[100%] h-auto bg-purple-100 rounded-md">
