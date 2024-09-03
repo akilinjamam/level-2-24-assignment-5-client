@@ -55,7 +55,7 @@ const MyBookings = () => {
                                     <p>Time: {item?.slots?.map((item:any) => <span>{item?.startTime} - {item?.endTime}, </span> )}</p>
                                     <p>Date: {item?.isConfirmed}</p>
                                     
-                                    <NavLink to={`/room-detail/${item?._id}`}><Button>Details</Button></NavLink>
+                                    <NavLink to={`/room-detail/${item?.room?._id}`}><Button>Details</Button></NavLink>
                                     
                                 </section>
                             </div>
