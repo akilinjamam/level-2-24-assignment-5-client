@@ -18,7 +18,7 @@ const Layout = ({children}:ILayoutProps) => {
     const token = localStorage.getItem("roomBridgeToken");
 
     useEffect(() => {
-        if(location.slice(0,13) === '/room-detail/' || location === '/booking'){
+        if(location.slice(0,13) === '/room-detail/' || location === '/booking' || location === '/my-bookings'){
             if(token){
                 const userinfo = verifyToken(token) 
                 const role = userinfo?.role

@@ -2,6 +2,7 @@ import Layout from "../layout/Layout";
 import Bookings from "../page/booking/Booking";
 import Checkout from "../page/chckout/Checkout";
 import Login from "../page/Login/Login";
+import MyBookings from "../page/my-bookings/MyBooking";
 import Registration from "../page/Registration/Registration";
 import RoomDetails from "../page/roomDetails/RoomDetails";
 
@@ -25,5 +26,9 @@ export const authenticationRoute = [
     {
         path: '/checkout/:checkoutId',
         element: <Layout><Checkout/></Layout>
+    },
+    {
+        path: '/my-bookings',
+        element: <Layout><MyBookings/></Layout>
     },
 ]

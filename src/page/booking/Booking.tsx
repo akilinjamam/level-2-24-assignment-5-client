@@ -11,11 +11,6 @@ import { useGetAllRoomsQuery } from "../../redux/features/room.api";
 import { addBookings } from "../../redux/features/booking.slice";
 import { toast } from "react-toastify";
 // import { toast } from "react-toastify";
-
-
-
-
-
 type Inputs = {
     date: string;
     email: string;
@@ -34,33 +29,27 @@ const Bookings = () => {
     const {bookingId} = useParams();
 
     const [dateHolder, setDateHolder] = useState('');
-    console.log(bookingId);
+    const [availableDate, setAvailableDate] = useState('');
+  
     const [addSlots, setAddSlots] = useState<TAddSlots[]>([])
     
-    console.log(addSlots)
-
-    const slotQueryObjects = [
-        {
-            name: 'date',
-            value: dateHolder
-        },
-        {
-            name: 'roomId',
-            value: bookingId
-        },
-    ]
-
-
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm<Inputs>()
 
-      const {data:allSlots, isLoading} = useGetAllSlotsQuery(slotQueryObjects)
+      const {data:allSlots, isLoading} = useGetAllSlotsQuery('')
+    //   console.log(allSlots)
       const {data:users} = useGetAllUserQuery('')
       const {data:allRoms} = useGetAllRoomsQuery('')
-      console.log(allSlots?.data)
+
+      const allSlotsAccordingToRoom = allSlots?.data?.map((f:any) => f?.date);
+
+      const showUniqueDate = [...new Set(allSlotsAccordingToRoom)];
+
+      console.log(showUniqueDate)
+     
 
       const token = localStorage.getItem("roomBridgeToken");
       const getUserEmail = verifyToken(token as string);
@@ -77,7 +66,7 @@ const Bookings = () => {
       const dispatch = useAppDispatch()
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log(data)
+      
         setDateHolder(data.date)
       }
 
@@ -113,7 +102,7 @@ const Bookings = () => {
             roomName: findRooms?.name
         }
 
-        console.log(bookingData)
+       
 
         if(bookingData.date && bookingData.slots.length !== 0 && bookingData.room && bookingData.user && bookingData.totalAmount && bookingData.isConfirmed){
             dispatch(addBookings(bookingData))
@@ -132,8 +121,17 @@ const Bookings = () => {
                 <p  className="text-gray-700 text-3xl font-bold my-6">Booking Form:</p>
             <hr />
             <br />
+            <div className="w-[200%] h-[auto] bg-purple-100 rounded-md p-2">
+                <p className="ml-3">Available slots for Dates : </p>
+                <div className="flex items-center">
+                    {
+                        showUniqueDate?.map((item:any) => <p onClick={() => setAvailableDate(item)} className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
+                    }
+                </div>
+            </div>
+            <br />
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="date" {...register("date")}  />
+                    <input value={availableDate} style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="date" {...register("date")}  />
                     {errors.date && <span>This field is required</span>}
                     <br />
                     <div className="flex flex-wrap lg:w-[200%] md:w-[100%] h-auto bg-purple-100 rounded-md">

@@ -21,6 +21,7 @@ const Navbar = () => {
         if(location.slice(0,13) === '/room-detail/') return 'block'
         if(location.slice(0,9) === '/booking/') return 'block'
         if(location.slice(0,10) === '/checkout/') return 'block'
+        if(location === '/my-bookings') return 'block'
 
         if(findNav){
             return 'block'
@@ -71,7 +72,9 @@ const Navbar = () => {
                                 >
                                     <p>USER</p>
                                     <hr className='my-2' />
-                                    <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
+                                    <NavLink to='/my-bookings'>
+                                        <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
+                                    </NavLink>
                                     <p><i className="uil uil-signout text-lg"></i> Logout</p>
 
                                 </div>
