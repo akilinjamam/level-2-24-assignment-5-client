@@ -13,6 +13,8 @@ const Navbar = () => {
     const [view, setView] = useState(false)
     const [userView, setUserView] = useState(false);
 
+    console.log(location.slice(0,10))
+
     const handleNavbar = () => {
         const findNav = navManuRoutes?.some(item => {
             return item.link === location
@@ -22,6 +24,7 @@ const Navbar = () => {
         if(location.slice(0,9) === '/booking/') return 'block'
         if(location.slice(0,10) === '/checkout/') return 'block'
         if(location === '/my-bookings') return 'block'
+        if(location.slice(0,10) === '/dashboard') return 'block'
 
         if(findNav){
             return 'block'
@@ -51,7 +54,7 @@ const Navbar = () => {
                    {
                     navManuRoutes.map((nav:TNav, index:number) => {
                         const active = (value: string) => {
-                            return value === location ? 'text-purple-600' : 'text-gray-700' 
+                            return (value === location || value === location.slice(0,10))  ? 'text-purple-600' : 'text-gray-700' 
                         }
                         return (
                             <div key={index+1}>

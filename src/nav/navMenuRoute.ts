@@ -3,6 +3,7 @@ export type TNav = {
   icon: string;
   link: string;
   hide: boolean;
+  sublink?: string[];
 };
 
 export const navManuRoutes: TNav[] = [
@@ -35,6 +36,7 @@ export const navManuRoutes: TNav[] = [
     icon: "",
     link: "/dashboard",
     hide: false,
+    sublink: ["/dashboard/admin-slot", "/dashboard/admin-booking"],
   },
   {
     name: "Registration",

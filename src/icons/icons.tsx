@@ -88,6 +88,10 @@ export const room = <i className="uil uil-bed-double text-5xl text-gray-700"></i
 export const bookingRoom = <i className="uil uil-bookmark text-5xl text-gray-700"></i>
 export const schedule = <i className="uil uil-schedule text-5xl text-gray-700"></i>
 
+export const roomSmall = <i className="uil uil-bed-double "></i>
+export const bookingRoomSmall = <i className="uil uil-bookmark "></i>
+export const scheduleSmall = <i className="uil uil-schedule "></i>
+
 
 export const u1 = <img src={user1} alt="" />
 export const u2 = <img src={user2} alt="" />

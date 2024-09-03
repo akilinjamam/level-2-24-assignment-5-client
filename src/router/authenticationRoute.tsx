@@ -1,4 +1,9 @@
+import AdminLayout from "../layout/AdminLayout";
 import Layout from "../layout/Layout";
+import AdminBooking from "../page/admin/booking/AdminBooking";
+import Dashboard from "../page/admin/Dashboard";
+import AdminRoom from "../page/admin/romm/AdminRoom";
+import AdminSlot from "../page/admin/slots/AdminSlot";
 import Bookings from "../page/booking/Booking";
 import Checkout from "../page/chckout/Checkout";
 import Login from "../page/Login/Login";
@@ -31,4 +36,20 @@ export const authenticationRoute = [
         path: '/my-bookings',
         element: <Layout><MyBookings/></Layout>
     },
+    {
+        path: '/dashboard',
+        element: <AdminLayout><Dashboard/></AdminLayout>,
+        children: [
+            { index: true, element: <AdminRoom/> },
+            {
+                path: 'admin-slot',
+                element: <AdminSlot/>
+            },
+            {
+                path: 'admin-booking',
+                element: <AdminBooking/>
+            },
+        ]
+    },
 ]
+
