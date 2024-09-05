@@ -43,6 +43,7 @@ const Navbar = () => {
     const logout = () => {
         localStorage.removeItem("roomBridgeToken");
         navigate('/login')
+        setUserView(false)
     }
 
     return (
@@ -101,7 +102,7 @@ const Navbar = () => {
                                         getUser?.role === 'admin'
                                         &&
                                         <div>
-                                        <p>USER</p>
+                                        <p>ADMIN</p>
                                         <hr className='my-2' />
                                         <NavLink to='/dashboard'>
                                             <p><span ><i className="uil uil-create-dashboard"></i> </span>Dashboard</p>
