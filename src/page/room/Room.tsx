@@ -8,7 +8,17 @@ import notFound from '../../images/not-found.png';
 import { useState } from "react";
 import { deleted } from "../../icons/icons";
 import Pagination from "../../components/pagination/Pagination";
+import loadingAnim from '../../animation/loading.json';
+import { useLottie } from "lottie-react";
 const Room = () => {
+
+    const options = {
+        animationData : loadingAnim,
+        loop: true
+    }
+
+    const {View} = useLottie(options)
+
     const [search, setSearch] = useState('')
     const [capacity, setCapacity] = useState('')
     const [price, setPrice] = useState('')
@@ -47,7 +57,7 @@ const Room = () => {
         },
     ]
 
-    const {data} = useGetAllRoomsQuery(allSearchableValue)
+    const {data, isLoading} = useGetAllRoomsQuery(allSearchableValue)
     console.log(data);
 
     const hidePagination = () => {
@@ -156,7 +166,7 @@ const Room = () => {
             }
             </div>
             :
-           data?.data?.length > 0 
+           !isLoading 
            ?
            data?.data?.map((item:TProductItem, index:number) => {
                 return (
@@ -177,7 +187,7 @@ const Room = () => {
             })
             :
             <div className="w-full h-[330px] bg-purple-50 my-6 rounded-lg flex items-center justify-center">
-                <img width={400} src={notFound} alt="" />
+                <div className="w-[300px]">{View}</div>
             </div>
 
         }

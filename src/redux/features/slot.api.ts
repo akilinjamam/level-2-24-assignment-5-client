@@ -26,15 +26,37 @@ const slotApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["slot"],
     }),
-    // registration: builder.mutation({
-    //   query: (userInfo) => ({
-    //     url: "/rooms/signup",
-    //     method: "POST",
-    //     body: userInfo,
-    //   }),
-    // }),
+    updateSlot: builder.mutation({
+      query: (slotInfo) => ({
+        url: "/slots",
+        method: "PUT",
+        body: slotInfo,
+      }),
+      invalidatesTags: ["slot"],
+    }),
+    addSlot: builder.mutation({
+      query: (slotInfo) => ({
+        url: "/slots",
+        method: "POST",
+        body: slotInfo,
+      }),
+      invalidatesTags: ["slot"],
+    }),
+    deleteSlot: builder.mutation({
+      query: (slotId) => ({
+        url: `/slots/${slotId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["slot"],
+    }),
   }),
 });
 
-export const { useGetAllSlotsQuery } = slotApi;
+export const {
+  useGetAllSlotsQuery,
+  useAddSlotMutation,
+  useUpdateSlotMutation,
+  useDeleteSlotMutation,
+} = slotApi;

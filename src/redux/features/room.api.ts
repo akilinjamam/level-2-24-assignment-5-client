@@ -19,6 +19,7 @@ const authApi = baseApi.injectEndpoints({
           params,
         };
       },
+      providesTags: ["room"],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transformResponse: (response: TResponse<any>) => {
         return {
@@ -27,14 +28,40 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
-    // registration: builder.mutation({
-    //   query: (userInfo) => ({
-    //     url: "/rooms/signup",
-    //     method: "POST",
-    //     body: userInfo,
-    //   }),
-    // }),
+    addRoom: builder.mutation({
+      query: (roomInfo) => ({
+        url: "/rooms",
+        method: "POST",
+        body: roomInfo,
+      }),
+      invalidatesTags: ["room"],
+    }),
+    updateRoom: builder.mutation({
+      query: (updateRoomInfo) => {
+        const { _id, ...bodyData } = updateRoomInfo;
+        return {
+          url: `/rooms/${_id}`,
+          method: "PUT",
+          body: bodyData,
+        };
+      },
+      invalidatesTags: ["room"],
+    }),
+    deleteRoom: builder.mutation({
+      query: (deletedId) => {
+        return {
+          url: `/rooms/${deletedId}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["room"],
+    }),
   }),
 });
 
-export const { useGetAllRoomsQuery } = authApi;
+export const {
+  useGetAllRoomsQuery,
+  useAddRoomMutation,
+  useUpdateRoomMutation,
+  useDeleteRoomMutation,
+} = authApi;

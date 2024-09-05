@@ -43,11 +43,7 @@ const Bookings = () => {
       const {data:users} = useGetAllUserQuery('')
       const {data:allRoms} = useGetAllRoomsQuery('')
 
-      const allSlotsAccordingToRoom = allSlots?.data?.map((f:any) => f?.date);
-
-      const showUniqueDate = [...new Set(allSlotsAccordingToRoom)];
-
-      console.log(showUniqueDate)
+      
      
 
       const token = localStorage.getItem("roomBridgeToken");
@@ -60,7 +56,14 @@ const Bookings = () => {
 
       const findSlotsForRoom = allSlots?.data?.filter((f:any) => f?.room?._id === bookingId);
 
+
       const findSlotsByDate = findSlotsForRoom?.filter((f:any) => f?.date === dateHolder)
+
+      const allSlotsAccordingToRoom = findSlotsForRoom?.map((f:any) => f?.date);
+
+      const showUniqueDate = [...new Set(allSlotsAccordingToRoom)];
+
+      console.log(showUniqueDate)
       
       const dispatch = useAppDispatch()
 
@@ -121,13 +124,13 @@ const Bookings = () => {
             <hr />
             <br />
             <div className="lg:w-[200%] sm:w-auto  h-[auto] bg-purple-100 rounded-md p-2">
-                <p className="ml-3">Available slots for Dates : </p>
+                <p className="ml-3">Available Dates for this Room : </p>
                 <div className="flex items-center">
                     { showUniqueDate?.length > 0
                         ?
                         showUniqueDate?.map((item:any) => <p className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
                         :
-                        <p>Loading..</p>
+                        <p className="text-red-600 ml-3">Not Available</p>
                     }
                 </div>
             </div>

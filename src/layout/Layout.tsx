@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import Navbar from "../nav/nav";
 import layout from './Layout.module.css';
-
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ const Layout = ({children}:ILayoutProps) => {
                 const role = userinfo?.role
                 if(role !== 'user'){
                     navigate('/login')
-                    toast.error('only user can see detail')
+                    toast.error('only user can get access')
                 }
             }else{
                 navigate('/login')

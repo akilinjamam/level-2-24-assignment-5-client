@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import nav from './Navbar.module.css';
 // import keyboard from '../../images/keyboard.png'
 
@@ -8,7 +8,8 @@ import { navManuRoutes, TNav } from './navMenuRoute';
 import { barger, user} from '../icons/icons';
 
 const Navbar = () => {
-    const token = localStorage.getItem("roomBridgeToken");
+    const navigate = useNavigate();
+   
     const location = useLocation().pathname;
     const [view, setView] = useState(false)
     const [userView, setUserView] = useState(false);
@@ -33,8 +34,10 @@ const Navbar = () => {
         }
     }
 
-    // navManuRoutes[5].hide = token ? true : false
-    navManuRoutes[6].hide = token ? false : true
+    const logout = () => {
+        localStorage.removeItem("roomBridgeToken");
+        navigate('/login')
+    }
 
     return (
         <div style={{display: `${handleNavbar()}`}} className={`${nav.main} w-[100%] h-12 my-6 rounded-2xl flex items-center`}>
@@ -71,14 +74,14 @@ const Navbar = () => {
                         <div style={{position:'relative'}}>
                             <p className='cursor-pointer' onClick={() => setUserView(!userView)}>{user}</p> 
                             <div >
-                                <div className='bg-purple-200 font-bold text-sm w-[150px] h-[120px] flex items-center justify-center text-gray-700 rounded-lg p-2'  style={{position:'absolute', top:'30px',right:'0', display: `${userView ? 'block' : 'none'}` }}
+                                <div className='bg-purple-200 font-bold text-sm w-[150px] h-[120px] flex items-center justify-center text-gray-700 rounded-lg p-2 z-10'  style={{position:'absolute', top:'30px',right:'0', display: `${userView ? 'block' : 'none'}` }}
                                 >
                                     <p>USER</p>
                                     <hr className='my-2' />
                                     <NavLink to='/my-bookings'>
                                         <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
                                     </NavLink>
-                                    <p><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
 
                                 </div>
                             </div>
@@ -109,7 +112,7 @@ const Navbar = () => {
                                             <p>USER</p>
                                             <hr className='my-2' />
                                             <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
-                                            <p><i className="uil uil-signout text-lg"></i> Logout</p>
+                                            <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
 
                                         </div>
                                     </div> 

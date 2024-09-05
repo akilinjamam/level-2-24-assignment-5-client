@@ -3,7 +3,12 @@ import Layout from "../layout/Layout";
 import AdminBooking from "../page/admin/booking/AdminBooking";
 import Dashboard from "../page/admin/Dashboard";
 import AdminRoom from "../page/admin/romm/AdminRoom";
+import CreateAdminRoom from "../page/admin/romm/CreateAdminRoom";
+import UpdateAdminRoom from "../page/admin/romm/UpdateAdminRoom";
 import AdminSlot from "../page/admin/slots/AdminSlot";
+import CreateAdminSlot from "../page/admin/slots/CreateAdminSlot";
+import UpdateAdminSlot from "../page/admin/slots/UpdateAdminSlot";
+import UserManagement from "../page/admin/userManagement/UserManagement";
 import Bookings from "../page/booking/Booking";
 import Checkout from "../page/chckout/Checkout";
 import Login from "../page/Login/Login";
@@ -40,14 +45,34 @@ export const authenticationRoute = [
         path: '/dashboard',
         element: <AdminLayout><Dashboard/></AdminLayout>,
         children: [
-            { index: true, element: <AdminRoom/> },
+            { index: true, element: <CreateAdminRoom/> },
+            {
+                path: 'admin-add-room',
+                element: <AdminRoom/>
+            },
+            {
+                path: 'admin-update-room/:updateRoomId',
+                element: <UpdateAdminRoom/>
+            },
             {
                 path: 'admin-slot',
                 element: <AdminSlot/>
             },
             {
+                path: 'create-admin-slot',
+                element: <CreateAdminSlot/>
+            },
+            {
+                path: 'update-admin-slot/:updateSlotId',
+                element: <UpdateAdminSlot/>
+            },
+            {
                 path: 'admin-booking',
                 element: <AdminBooking/>
+            },
+            {
+                path: 'user-management',
+                element: <UserManagement/>
             },
         ]
     },

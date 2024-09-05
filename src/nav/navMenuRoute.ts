@@ -36,7 +36,6 @@ export const navManuRoutes: TNav[] = [
     icon: "",
     link: "/dashboard",
     hide: false,
-    sublink: ["/dashboard/admin-slot", "/dashboard/admin-booking"],
   },
   {
     name: "Registration",
