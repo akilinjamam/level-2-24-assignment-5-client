@@ -60,8 +60,8 @@ const UpdateAdminSlot = () => {
                 toast.success(response.message)
             }
         } catch (error) {
-            console.log(error)
-            toast.error('something is wrong')
+            const err = error as any;
+            toast.error(err.data?.message)
         }
 
     }
