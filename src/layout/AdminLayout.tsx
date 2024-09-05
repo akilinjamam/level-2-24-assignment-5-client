@@ -15,7 +15,7 @@ interface ILayoutProps {
 const AdminLayout = ({children}:ILayoutProps) => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
-    const token = localStorage.getItem("roomBridgeToken");
+    const token = localStorage?.getItem("roomBridgeToken");
 
     useEffect(() => {
         if(location === '/dashboard'){

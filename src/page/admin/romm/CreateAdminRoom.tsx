@@ -31,7 +31,8 @@ const CreateAdminRoom = () => {
             <hr />
             { !isLoading
                 ?
-                <table>
+                <div className={`${viewRooms.tableContainer}`}>
+                    <table>
                     <tr>
                         <th>Room Name</th>
                         <th>Room No</th>
@@ -50,13 +51,17 @@ const CreateAdminRoom = () => {
                                 <td>{room?.pricePerSlot}</td>
                                 <td className="flex items-center justify-around">
                                     <button onClick={() => navigate(`/dashboard/admin-update-room/${room?._id}`)} className="text-sm px-2 py-1 bg-green-600 text-white rounded md ml-2">UPDATE</button>
+
+
+                                    
                                     <button onClick={() => dispatch(controllModal({open:true, id:room?._id, name: room?.name, type: "room"}))} className="text-sm px-2 py-1 bg-red-600 text-white rounded md ml-2">DELETE</button>
                                 </td>
                             </tr>
                         ))  
                     }
                
-                </table>
+                    </table>
+                </div>
                 :
                 <div className="w-full h-[300px] flex items-center justify-center">
                         <div className="w-[200px]">{View}</div>

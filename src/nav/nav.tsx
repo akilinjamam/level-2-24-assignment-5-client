@@ -6,8 +6,14 @@ import nav from './Navbar.module.css';
 import { useState } from 'react';
 import { navManuRoutes, TNav } from './navMenuRoute';
 import { barger, user} from '../icons/icons';
+import { verifyToken } from '../verifyToken/verifyToken';
 
 const Navbar = () => {
+
+    const token = localStorage.getItem('roomBridgeToken');
+    const getUser = verifyToken(token as string);
+    console.log(getUser?.role)
+
     const navigate = useNavigate();
    
     const location = useLocation().pathname;
@@ -71,21 +77,43 @@ const Navbar = () => {
                     } )
                    }
                   
-                        <div style={{position:'relative'}}>
+                        {
+                            getUser?.role
+                            &&
+                            <div style={{position:'relative'}}>
                             <p className='cursor-pointer' onClick={() => setUserView(!userView)}>{user}</p> 
                             <div >
                                 <div className='bg-purple-200 font-bold text-sm w-[150px] h-[120px] flex items-center justify-center text-gray-700 rounded-lg p-2 z-10'  style={{position:'absolute', top:'30px',right:'0', display: `${userView ? 'block' : 'none'}` }}
                                 >
-                                    <p>USER</p>
-                                    <hr className='my-2' />
-                                    <NavLink to='/my-bookings'>
-                                        <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
-                                    </NavLink>
-                                    <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    {
+                                        getUser?.role === 'user'
+                                        &&
+                                        <div>
+                                        <p>USER</p>
+                                        <hr className='my-2' />
+                                        <NavLink to='/my-bookings'>
+                                            <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
+                                        </NavLink>
+                                        <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    </div>
+                                    }
+                                    {
+                                        getUser?.role === 'admin'
+                                        &&
+                                        <div>
+                                        <p>USER</p>
+                                        <hr className='my-2' />
+                                        <NavLink to='/dashboard'>
+                                            <p><span ><i className="uil uil-create-dashboard"></i> </span>Dashboard</p>
+                                        </NavLink>
+                                        <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    </div>
+                                    }
 
                                 </div>
                             </div>
-                        </div>
+                            </div>
+                        }
                  
                 </section>                   
             </nav>
@@ -109,10 +137,32 @@ const Navbar = () => {
                                     <div >
                                         <div className='bg-purple-200 font-bold text-sm w-[150px] h-[120px] flex items-center justify-center text-gray-700 rounded-lg p-2'  style={{position:'absolute', top:'30px',right:'0', display: `${userView ? 'block' : 'none'}` }}
                                         >
-                                            <p>USER</p>
-                                            <hr className='my-2' />
+                                            <div>
+                                            {
+                                        getUser?.role === 'user'
+                                        &&
+                                        <div>
+                                        <p>USER</p>
+                                        <hr className='my-2' />
+                                        <NavLink to='/my-bookings'>
                                             <p><span ><i className="uil uil-user text-lg"></i></span> My Bookings</p>
-                                            <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                        </NavLink>
+                                        <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    </div>
+                                    }
+                                    {
+                                        getUser?.role === 'admin'
+                                        &&
+                                        <div>
+                                        <p>USER</p>
+                                        <hr className='my-2' />
+                                        <NavLink to='/dashboard'>
+                                            <p><span ><i className="uil uil-create-dashboard"></i> </span>Dashboard</p>
+                                        </NavLink>
+                                        <p className='cursor-pointer' onClick={logout}><i className="uil uil-signout text-lg"></i> Logout</p>
+                                    </div>
+                                    }
+                                            </div>
 
                                         </div>
                                     </div> 

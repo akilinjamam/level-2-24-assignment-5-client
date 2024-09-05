@@ -12,6 +12,23 @@ export const inputSlotItems: TSlotInputItems[] = [
     placeHolder: "type date:",
     reg: "date",
   },
+  {
+    type: "time",
+    placeHolder: "type start time:",
+    reg: "startTime",
+  },
+  {
+    type: "time",
+    placeHolder: "type room end time",
+    reg: "endTime",
+  },
+];
+export const inputSlotItemsForUpdate: TSlotInputItems[] = [
+  {
+    type: "date",
+    placeHolder: "type date:",
+    reg: "date",
+  },
   // {
   //   type: "time",
   //   placeHolder: "type start time:",

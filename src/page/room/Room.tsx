@@ -146,7 +146,7 @@ const Room = () => {
                     return (
                         <div key={index+1} className={`${room.partOne} w-full lg:h-[330px] xsm:h-auto sm:h-auto bg-purple-50 rounded-lg my-6 p-3 flex items-center justify-between`}>
                             <section className="lg:w-[30%] sm:w-full xsm:w-full lg:h-full sm:h-auto xsm:h-auto  rounded-lg">
-                                <img className="xsm:block sm:block xsm:mx-auto sm:mx-auto" style={{width:'400px', height:'300px', borderRadius:'10px'}} src={item?.img} alt="" />
+                                <img className="xsm:block sm:block xsm:mx-auto sm:mx-auto" style={{width:'400px', height:'300px', borderRadius:'10px'}} src={item?.images[0]} alt="" />
                             </section>
                             <section className="lg:w-[69%] xsm:w-full sm:w-full lg:h-full sm:h-auto xsm:h-auto  rounded-lg leading-8 p-3 text-gray-700">
                                 <p>Room Name: {item.name}</p>
@@ -172,7 +172,7 @@ const Room = () => {
                 return (
                     <div key={index+1} className={`${room.partOne} lg:w-full xsm:w-full sm:w-full lg:h-[330px] xsm:h-auto sm:h-auto bg-purple-50 rounded-lg my-6 p-3 flex items-center justify-between`}>
                         <section className="lg:w-[30%] xsm:w-full sm:w-full  h-full  rounded-lg ">
-                            <img className="xsm:block sm:block xsm:mx-auto sm:mx-auto" style={{width:'400px', height:'300px', borderRadius:'10px',}} src={item?.img} alt="" />
+                            <img className="xsm:block sm:block xsm:mx-auto sm:mx-auto" style={{width:'400px', height:'300px', borderRadius:'10px',}} src={item?.images[0]} alt="" />
                         </section>
                         <section className="w-[69%] h-full  rounded-lg leading-8 p-3 text-gray-700">
                             <p>Room Name: {item.name}</p>

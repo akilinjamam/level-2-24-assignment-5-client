@@ -29,7 +29,7 @@ const Dashboard = () => {
 
                             return (
                                 <NavLink to={item.link}>
-                                    <p className={`py-1.5 ${active(item)}`}>{item.icon} {item.title}</p>
+                                    <p className={`py-1.5 ${active(item)}`}>{item.icon} <span className="xsm:hidden sm:hidden md:inline lg:inline">{item.title}</span></p>
                                 </NavLink>
                             )
                         })

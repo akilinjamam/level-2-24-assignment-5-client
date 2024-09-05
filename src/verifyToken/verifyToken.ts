@@ -6,5 +6,9 @@ interface UserInfo extends JwtPayload {
   exp?: number; // Assuming role is optional
 }
 export const verifyToken = (token: string): UserInfo | null => {
-  return jwtDecode<UserInfo>(token) as JwtPayload;
+  if (token) {
+    return jwtDecode<UserInfo>(token) as JwtPayload;
+  } else {
+    return null;
+  }
 };

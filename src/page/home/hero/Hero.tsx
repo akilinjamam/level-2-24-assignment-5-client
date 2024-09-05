@@ -21,9 +21,9 @@ const Hero = () => {
                     />
                     </p>
                     <p className='text-gray-500 mb-10 leading-7'>
-                    Discover the perfect blend of precision, style, and durability with our top-notch mechanical keyboards. Elevate your typing and gaming experience to the next level with our expertly crafted keyboards designed for enthusiasts and professionals alike. Unleash your potential with the ultimate in tactile feedback and customization.
+                    RoomBridge is a dynamic company specializing in providing efficient and modern meeting room solutions. We offer a seamless experience for booking and managing conference spaces, designed to meet the needs of businesses of all sizes. At RoomBridge, our goal is to bridge the gap between convenience and functionality, ensuring that every meeting is a success.
                     </p>
-                   <NavLink to='/products'>
+                   <NavLink to='/room'>
                         <button className='w-[130px] bg-purple-600 text-white font-bold px-3 py-2 rounded-lg hover:bg-purple-700 flex items-center justify-between'>{world} BOOK NOW</button>
                    </NavLink>
                 </div>

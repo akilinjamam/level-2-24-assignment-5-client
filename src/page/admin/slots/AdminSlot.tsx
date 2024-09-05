@@ -59,44 +59,52 @@ const AdminSlot = () => {
 
     return (
         <div className={`w-full ${viewSlot}`}>
-            <div className="w-full h-[60px] flex items-center justify-between">
-                <span className="font-bold">Total Slots : {allSlots?.data?.length ? allSlots?.data?.length : 'loading...'}</span>
-                <div className="flex">
-                    <select value={queryData.date} name="" id=""
-                    onChange={(e) => setQueryData({...queryData, date: e.target.value})}
-                    >
-                        <option value="">select date</option>
-                        {
-                            uniqueDateList?.map((item:any) => <option value={item}>{item}</option> )
-                        }
-                        
-                    </select>
+            <div className="w-full lg:h-[60px] sm:h-auto xsm:h-auto lg:flex lg:items-center lg:justify-between md:flex md:justify-between md:items-center">
+                <div>
+                    <span className="font-bold">Total Slots : {allSlots?.data?.length ? allSlots?.data?.length : 'loading...'}</span>
+                </div>
+                <div className="flex ">
+                    <div>
+                        <select value={queryData.date} name="" id=""
+                        onChange={(e) => setQueryData({...queryData, date: e.target.value})}
+                        >
+                            <option value="">select date</option>
+                            {
+                                uniqueDateList?.map((item:any) => <option value={item}>{item}</option> )
+                            }
+                            
+                        </select>
+                    </div>
+
                     <div onClick={() => {
                         setQueryData({...queryData, date: ''})
                     }} className="ml-2">{deleted}</div>
-                </div>
-                <div className="flex">
-                    <select value={queryData.roomId} name="" id=""
-                    onChange={(e) => setQueryData({...queryData, roomId: e.target.value})}
-                    >
-                        <option value="">select room</option>
-                        {
-                            allRooms?.data?.map((item:any) => <option value={item?._id}>{item?.name}</option> )
-                        }
-                        
-                    </select>
-                    <div className="ml-2" onClick={() => {
-                        setQueryData({...queryData, roomId: ''})
-                    }}>
-                        {deleted}
                     </div>
-                </div>
+                    <div className="flex">
+                        <select value={queryData.roomId} name="" id=""
+                        onChange={(e) => setQueryData({...queryData, roomId: e.target.value})}
+                        >
+                            <option value="">select room</option>
+                            {
+                                allRooms?.data?.map((item:any) => <option value={item?._id}>{item?.name}</option> )
+                            }
+                            
+                        </select>
+                        <div className="ml-2" onClick={() => {
+                            setQueryData({...queryData, roomId: ''})
+                        }}>
+                            {deleted}
+                        </div>
+                    </div>
+                <div>
                 <span><NavLink to='/dashboard/create-admin-slot'><Button data={<i className="uil uil-plus"></i>}> CREATE SLOTS</Button></NavLink></span>
+                </div>
             </div>
             <hr />
             { !isLoading
                 ?
-                <table>
+                <div className={`${viewSlot.tableContainer}`}>
+                    <table>
                     <tr>
                         <th>Room Name</th>
                         <th>Room No</th>
@@ -121,7 +129,8 @@ const AdminSlot = () => {
                         ))  
                     }
                
-                </table>
+                    </table>
+                </div>
                 :
                 <div className="w-full h-[300px] flex items-center justify-center">
                         <div className="w-[200px]">{View}</div>

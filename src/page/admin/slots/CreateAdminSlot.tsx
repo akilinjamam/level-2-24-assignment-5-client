@@ -51,15 +51,11 @@ const CreateAdminSlot = () => {
 
         console.log(roomId)
         console.log(data);
-
-        
-
-
     }
 
     return (
         <div>
-            <p className="text-gray-800 font-bold mb-10">CREATE ROOM :</p>
+            <p className="text-gray-800 font-bold mb-10">CREATE SLOT :</p>
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <select name="" id="" onChange={(e) => setRoomId(e.target.value)}>

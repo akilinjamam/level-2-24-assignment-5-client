@@ -126,11 +126,20 @@ const Bookings = () => {
             <div className="lg:w-[200%] sm:w-auto  h-[auto] bg-purple-100 rounded-md p-2">
                 <p className="ml-3">Available Dates for this Room : </p>
                 <div className="flex items-center">
-                    { showUniqueDate?.length > 0
-                        ?
-                        showUniqueDate?.map((item:any) => <p className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
-                        :
-                        <p className="text-red-600 ml-3">Not Available</p>
+                    
+                    {
+                        isLoading ?
+
+                         <p>Loading..</p>
+                         :
+                         <div>
+                            { showUniqueDate?.length > 0
+                                ?
+                                showUniqueDate?.map((item:any) => <p className="bg-purple-600 text-white mx-2 py-1 px-2 rounded-md">{item}</p> )
+                                :
+                                <p className="text-red-600 ml-3">Not Available</p>
+                            }
+                         </div>
                     }
                 </div>
             </div>

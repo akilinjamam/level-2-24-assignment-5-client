@@ -33,6 +33,7 @@ const authApi = baseApi.injectEndpoints({
           params,
         };
       },
+      providesTags: ["user"],
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       transformResponse: (response: TResponse<any>) => {
         return {
@@ -41,8 +42,20 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    updateUser: builder.mutation({
+      query: (updatedInfo) => ({
+        url: `/auth/${updatedInfo.id}`,
+        method: "PUT",
+        body: updatedInfo.data,
+      }),
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegistrationMutation, useGetAllUserQuery } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegistrationMutation,
+  useGetAllUserQuery,
+  useUpdateUserMutation,
+} = authApi;

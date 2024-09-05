@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { inputSlotItems, TSlotInputItems } from "./inputSlotItems";
+import { inputSlotItemsForUpdate, TSlotInputItems } from "./inputSlotItems";
 import { useGetAllSlotsQuery, useUpdateSlotMutation } from "../../../redux/features/slot.api";
 
 export  type TSlotInputs = {
@@ -72,7 +72,7 @@ const UpdateAdminSlot = () => {
             <div>
                 <form>
                     {
-                        inputSlotItems.map((input: TSlotInputItems) => (
+                        inputSlotItemsForUpdate.map((input: TSlotInputItems) => (
                             <div>
                                 <input 
                                 type={input.type}

@@ -64,8 +64,8 @@ const Modal = () => {
 
     return (
         
-            <div className={`${open ? 'block' : 'hidden'} w-[82%] h-full  flex items-center justify-center  absolute right-0`}>
-                <div className=" bg-purple-100 lg:w-[50%] sm:w-[95%] md:w-[50%] xsm:w-95% h-[350px]  ">
+            <div className={`${open ? 'block' : 'hidden'} lg:w-[82%] md:w-[90%] sm:w-full xsm:w-full h-full  flex items-center justify-center  absolute right-0`}>
+                <div className=" bg-purple-100 lg:w-[50%] sm:w-[95%] md:w-[50%] xsm:w-[95%] h-[350px]  ">
                     <div className="w-full h-[40px] bg-purple-200 flex items-center justify-end px-2">
                         <p onClick={() => dispatch(controllModal({open: false}))} className="cursor-pointer">{deleted}</p>
                     </div>
