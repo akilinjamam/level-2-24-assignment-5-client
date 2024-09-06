@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# Meeting Room Booking System for Co-working spaces
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## This project is build with Typscript, React vite for Clint Site Application:
 
-Currently, two official plugins are available:
+### Technology i have implemented for this projects are :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. redux
+2. jwt
+3. lottie-react
+4. react router dom
+5. react hook form
+6. react redux
+7. react simple typewriter
+8. react slick
+9. axios
+10. sslcommerz for payment intigration
+11. react toastify
 
-## Expanding the ESLint configuration
+### Admin credentials and other credentials if necessary :
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+For Admin:
 
-- Configure the top-level `parserOptions` property like this:
+email: examiner.as.admin@admin.com
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+password: admin123
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+For User:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+email: examiner.as.user@user.com
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+password: user123
