@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useLoginMutation } from '../../redux/auth/authApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 type Inputs = {
     name: string;
@@ -21,6 +22,8 @@ type Inputs = {
   };
 
 const Login = () => {
+    const [loading, setLoading] = useState(false);
+    const [selectBtn, setSelectBtn] = useState('');
     const navigate = useNavigate();
     const {
         register,
@@ -34,7 +37,7 @@ const Login = () => {
 
       const onSubmit: SubmitHandler<Inputs> = async (data) => {
         try {
-
+            setSelectBtn('3')
             if(!data.email && !data.password){
                 return toast.error('email and password not added')
             }
@@ -50,7 +53,6 @@ const Login = () => {
              localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
              toast.success(res.message)
              navigate('/')
-             
            } 
         
         } catch (error) {
@@ -74,6 +76,40 @@ const Login = () => {
             <p  className="text-gray-700 text-3xl font-bold my-6">Login Form:</p>
             <hr />
             <br />
+            <div>
+                <button className='w-[100px] h-[35px] rounded-md mr-[10px] bg-purple-600 text-white font-bold cursor-pointer' onClick={async (e) => {
+                  e.preventDefault();
+                  setLoading(true);
+                  setSelectBtn('1')
+                  const res = await addLogin({
+                    email: 'examiner.as.admin@admin.com',
+                    password: 'admin123'
+                  }).unwrap()
+                  if(res){
+                    localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
+                    toast.success(res.message)
+                    setLoading(false)
+                    navigate('/')
+                  } 
+                }}>{(loading && selectBtn === '1') ? 'loading...' : 'Admin Login'}</button>
+                <button className='w-[100px] h-[35px] mr-[10px] rounded-md bg-purple-600 text-white font-bold cursor-pointer'  onClick={async (e) => {
+                  e.preventDefault();
+                  setLoading(true)
+                  setSelectBtn('2')
+                  const res = await addLogin({
+                    email: 'examiner.as.user@user.com',
+                    password: 'user123'
+                  }).unwrap()
+
+                  if(res){
+                    localStorage.setItem('roomBridgeToken', JSON.stringify(res.token))
+                    toast.success(res.message)
+                    setLoading(false)
+                    navigate('/')
+                  } 
+                }}>{(loading && selectBtn === '2') ? 'loading...' : 'User Login'}</button>
+            </div>
+            <br />
             <form onSubmit={handleSubmit(onSubmit)}>
                 
                 <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="email" {...register("email")} placeholder='type your email' />
@@ -81,7 +117,7 @@ const Login = () => {
                 <br />
                 <input style={{background:'none',borderBottom:'1px solid lightgray'}} className='mb-3 w-[400px] ' type="text"  {...register("password")} placeholder='type password' />
                 <br />
-                <input className='w-[100px] h-[35px] rounded-md bg-purple-600 text-white font-bold cursor-pointer' type="submit" value="SUBMIT" />
+                <input className='w-[100px] h-[35px] rounded-md bg-purple-600 text-white font-bold cursor-pointer' type="submit" value={(loading && selectBtn === '3') ? 'loading...': 'SUBMIT'} />
             </form>
         </section>
     </div>
