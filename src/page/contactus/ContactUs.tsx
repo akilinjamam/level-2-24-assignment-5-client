@@ -1,13 +1,13 @@
 // import contactus from '../../images/contactus.jpg'
 import { useLottie } from 'lottie-react';
 import contactAnim from '../../animation/contactus.json';
-import {io, Socket}  from 'socket.io-client'
-import { useEffect, useRef, useState } from 'react';
+// import {io, Socket}  from 'socket.io-client'
+// import { useEffect, useRef, useState } from 'react';
 
-interface ICECandidateData {
-    room: string;
-    candidate: RTCIceCandidate;
-  }
+// interface ICECandidateData {
+//     room: string;
+//     candidate: RTCIceCandidate;
+//   }
   
 //   interface OfferAnswerData {
 //     room: string;
@@ -20,87 +20,87 @@ const Contact = () => {
 
     // setup socket io for audio and video calling;
 
-    const [roomId, setRoomId] = useState<string>('');
-    const [inCall, setInCall] = useState<boolean>(false);
-    const localVideoRef = useRef<HTMLVideoElement | null>(null);
-    const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
-    const peerConnection = useRef<RTCPeerConnection | null>(null);
-    const socket = useRef<Socket | null>(null);
+    // const [roomId, setRoomId] = useState<string>('');
+    // const [inCall, setInCall] = useState<boolean>(false);
+    // const localVideoRef = useRef<HTMLVideoElement | null>(null);
+    // const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
+    // const peerConnection = useRef<RTCPeerConnection | null>(null);
+    // const socket = useRef<Socket | null>(null);
   
-    useEffect(() => {
-      socket.current = io('https://level-2-24-assignment-3.vercel.app/api/socket');
+    // useEffect(() => {
+    //   socket.current = io('http://localhost:5000');
   
-      socket.current.on('user-connected', async () => {
-        console.log('User connected, creating offer...');
-        if (peerConnection.current) {
-          const offer = await peerConnection.current.createOffer();
-          await peerConnection.current.setLocalDescription(offer);
-          socket.current?.emit('offer', { room: roomId, offer });
-        }
-      });
+    //   socket.current.on('user-connected', async () => {
+    //     console.log('User connected, creating offer...');
+    //     if (peerConnection.current) {
+    //       const offer = await peerConnection.current.createOffer();
+    //       await peerConnection.current.setLocalDescription(offer);
+    //       socket.current?.emit('offer', { room: roomId, offer });
+    //     }
+    //   });
   
-      socket.current.on('offer', async (data: RTCSessionDescriptionInit) => {
-        if (peerConnection.current) {
-          await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data));
-          const answer = await peerConnection.current.createAnswer();
-          await peerConnection.current.setLocalDescription(answer);
-          socket.current?.emit('answer', { room: roomId, answer });
-        }
-      });
+    //   socket.current.on('offer', async (data: RTCSessionDescriptionInit) => {
+    //     if (peerConnection.current) {
+    //       await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data));
+    //       const answer = await peerConnection.current.createAnswer();
+    //       await peerConnection.current.setLocalDescription(answer);
+    //       socket.current?.emit('answer', { room: roomId, answer });
+    //     }
+    //   });
   
-      socket.current.on('answer', async (data: RTCSessionDescriptionInit) => {
-        if (peerConnection.current) {
-          await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data));
-        }
-      });
+    //   socket.current.on('answer', async (data: RTCSessionDescriptionInit) => {
+    //     if (peerConnection.current) {
+    //       await peerConnection.current.setRemoteDescription(new RTCSessionDescription(data));
+    //     }
+    //   });
   
-      socket.current.on('ice-candidate', async (data: RTCIceCandidateInit) => {
-        if (data && peerConnection.current) {
-          await peerConnection.current.addIceCandidate(new RTCIceCandidate(data));
-        }
-      });
+    //   socket.current.on('ice-candidate', async (data: RTCIceCandidateInit) => {
+    //     if (data && peerConnection.current) {
+    //       await peerConnection.current.addIceCandidate(new RTCIceCandidate(data));
+    //     }
+    //   });
   
-      return () => {
-        socket.current?.disconnect();
-      };
-    }, [roomId]);
+    //   return () => {
+    //     socket.current?.disconnect();
+    //   };
+    // }, [roomId]);
   
-    const startCall = async () => {
-      peerConnection.current = new RTCPeerConnection({
-        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
-      });
+    // const startCall = async () => {
+    //   peerConnection.current = new RTCPeerConnection({
+    //     iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+    //   });
   
-      peerConnection.current.onicecandidate = (event: RTCPeerConnectionIceEvent) => {
-        if (event.candidate) {
-          socket.current?.emit('ice-candidate', {
-            room: roomId,
-            candidate: event.candidate,
-          } as ICECandidateData);
-        }
-      };
+    //   peerConnection.current.onicecandidate = (event: RTCPeerConnectionIceEvent) => {
+    //     if (event.candidate) {
+    //       socket.current?.emit('ice-candidate', {
+    //         room: roomId,
+    //         candidate: event.candidate,
+    //       } as ICECandidateData);
+    //     }
+    //   };
   
-      peerConnection.current.ontrack = (event: RTCTrackEvent) => {
-        if (remoteVideoRef.current) {
-          remoteVideoRef.current.srcObject = event.streams[0];
-        }
-      };
+    //   peerConnection.current.ontrack = (event: RTCTrackEvent) => {
+    //     if (remoteVideoRef.current) {
+    //       remoteVideoRef.current.srcObject = event.streams[0];
+    //     }
+    //   };
   
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        if (localVideoRef.current) {
-          localVideoRef.current.srcObject = stream;
-        }
+    //   try {
+    //     const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    //     if (localVideoRef.current) {
+    //       localVideoRef.current.srcObject = stream;
+    //     }
   
-        stream.getTracks().forEach((track) => {
-          peerConnection.current?.addTrack(track, stream);
-        });
+    //     stream.getTracks().forEach((track) => {
+    //       peerConnection.current?.addTrack(track, stream);
+    //     });
   
-        socket.current?.emit('join-room', roomId);
-        setInCall(true);
-      } catch (error) {
-        console.error('Error accessing media devices:', error);
-      }
-    };
+    //     socket.current?.emit('join-room', roomId);
+    //     setInCall(true);
+    //   } catch (error) {
+    //     console.error('Error accessing media devices:', error);
+    //   }
+    // };
 
 
 
@@ -148,7 +148,7 @@ const Contact = () => {
                 <input className='w-[100px] h-[35px] rounded-md bg-purple-600 text-white font-bold cursor-pointer' type="submit" value="SUBMIT" />
             </form>
             <br />
-            <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+            {/* <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       {!inCall ? (
         <div className="flex flex-col items-center">
           <input
@@ -171,7 +171,7 @@ const Contact = () => {
           <video ref={remoteVideoRef} autoPlay playsInline className="w-full rounded shadow-lg" />
         </div>
       )}
-        </div>
+            </div> */}
         </section>
         
     </div>
